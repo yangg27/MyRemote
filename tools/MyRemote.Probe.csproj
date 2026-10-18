@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <AssemblyName>MyRemote.Probe</AssemblyName>
+    <RootNamespace>MyRemote.Probe</RootNamespace>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <!-- 不编译 src 自身的 obj/bin 产物，避免与探针自身产物冲突 -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);..\src\obj\**;..\src\bin\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      直接链接 src 目录的主程序源码（排除它自己的 Program.cs，避免入口点冲突），
+      保证探针验证的就是生产代码本身，而不是另写一份。
+      修改主程序源码后需重新编译探针。
+    -->
+    <Compile Include="..\src\**\*.cs" Exclude="..\src\Program.cs;..\src\obj\**;..\src\bin\**" LinkBase="Linked" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

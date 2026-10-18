@@ -1,0 +1,35 @@
+# ===== 构建产物 =====
+bin/
+obj/
+publish/
+*.user
+*.suo
+.vs/
+
+# ===== 发布产物（大文件，进 release/ 目录）=====
+# 注意：GitHub 单文件限制 100MB，161MB 的裸 exe 无法直接提交
+# 交付物请以 zip 形式放在 release/ 目录
+*.pdb
+
+# ===== 运行期生成文件（不应提交）=====
+devices.json
+secrets.json
+MyRemote.log
+crash.log
+Rollback/
+.portable
+
+# ===== 临时文件 =====
+*.tmp
+*.mrtmp
+*.bak
+*.corrupt-*
+.tmp/
+
+# ===== 屏幕截图（本地验证产物）=====
+screenshots/
+
+# ===== 系统文件 =====
+Thumbs.db
+desktop.ini
+.DS_Store
